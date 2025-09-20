@@ -1,0 +1,73 @@
+body {
+    font-family: 'IM Fell English SC', serif;
+    background-color: #000000; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.font-cinzel { font-family: 'Cinzel', serif; }
+.font-pixel { font-family: 'Press Start 2P', cursive; }
+
+#main-menu {
+    background-image: url('https://i.ibb.co/d0tHG9GZ/game-title-screen.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#game-container {
+    flex: 1; 
+    position: relative; 
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+}
+
+.path-marker {
+    position: absolute;
+    width: 4vw;
+    height: 4vw;
+    max-width: 40px;
+    max-height: 40px;
+    background-color: rgba(240, 230, 210, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    backdrop-filter: blur(1.5px);
+}
+.path-marker.challenge { border-color: rgba(231, 111, 81, 0.6); }
+.path-marker.finish { border-color: rgba(241, 196, 15, 0.8); background-color: rgba(241, 196, 15, 0.25); }
+
+#player-pawn {
+    position: absolute;
+    z-index: 10;
+    width: 64px; height: 64px;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    transform: scale(1.6) translate(-50%, -75%);
+    transition: top 0.3s ease-in-out, left 0.3s ease-in-out;
+    pointer-events: none;
+}
+#player-pawn.idle { background-image: url('https://i.ibb.co/m5xdt6TX/Idle.png'); animation: play-idle 1s steps(6) infinite; }
+#player-pawn.running { background-image: url('https://i.ibb.co/PG9ngtgp/Run.png'); animation: play-run 0.8s steps(8) infinite; }
+@keyframes play-idle { from { background-position: 0px; } to { background-position: -384px; } }
+@keyframes play-run { from { background-position: 0px; } to { background-position: -512px; } }
+
+#ui-panel {
+    backdrop-filter: blur(5px);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    z-index: 20;
+    transition: background-color 1s ease, border-color 1s ease;
+}
+
+.dice-container { perspective: 800px; }
+.dice { width: 50px; height: 50px; position: relative; transform-style: preserve-3d; transition: transform 1s; }
+.dice-face { position: absolute; width: 50px; height: 50px; border: 2px solid #888; background: #f0e6d6; color: #3d352e; font-size: 1.1rem; font-weight: bold; display: flex; justify-content: center; align-items: center; }
+.face-1 { transform: rotateY(0deg) translateZ(25px); } .face-2 { transform: rotateY(90deg) translateZ(25px); } .face-3 { transform: rotateY(180deg) translateZ(25px); } .face-4 { transform: rotateY(-90deg) translateZ(25px); } .face-5 { transform: rotateX(90deg) translateZ(25px); } .face-6 { transform: rotateX(-90deg) translateZ(25px); }
+.dice-challenge .face-easy { background-color: #27ae60; color: white; } .dice-challenge .face-mid { background-color: #f39c12; color: white; } .dice-challenge .face-hard { background-color: #c0392b; color: white; }
+
+#minigame-modal { background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+#minigame-container canvas { image-rendering: pixelated; }
+.prediction-input { width: 80px; text-align: center; }
